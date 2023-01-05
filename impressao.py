@@ -21,12 +21,37 @@ while escolha_int > int(tamanho):
         print(f'{numero} - {impressoras}')
         numero = numero + 1
     escolha = input('\nEscolha uma impressora: ')
-    escolha_int = int(escolha)
-
+    while not escolha:
+        limpar()
+        print('#######################################')
+        print('# Erro: Favor digitar um valor válido #')
+        print('#######################################')
+        print('###########################')
+        print('# Impressoras disponíveis #')
+        print('###########################\n')
+        numero = 0
+        for impressoras in lista_impressoras:
+            print(f'{numero} - {impressoras}')
+            numero = numero + 1
+        escolha = input('\nEscolha uma impressora: ')
+    while escolha.isdigit() == False:
+        limpar()
+        print('#######################################')
+        print('# Erro: Favor digitar um valor válido #')
+        print('#######################################')
+        print('###########################')
+        print('# Impressoras disponíveis #')
+        print('###########################\n')
+        numero = 0
+        for impressoras in lista_impressoras:
+            print(f'{numero} - {impressoras}')
+            numero = numero + 1
+        escolha = input('\nEscolha uma impressora: ')    
+    
     while escolha_int > int(tamanho):
         limpar()
         print('#######################################')
-        print(f"# Erro: Escolha um número entre 0 e {tamanho} #")
+        print(f"# Erro: Escolha um número entre 0 e {tamanho -1} #")
         print('#######################################\n')
         numero = 0
         for impressoras in lista_impressoras:
@@ -34,23 +59,24 @@ while escolha_int > int(tamanho):
             numero = numero + 1
         escolha = input('\nEscolha uma impressora: ')
         escolha_int = int(escolha)
+            
+        if escolha_int in range(int(tamanho)):
+            impressora_escolhida = (f"Você escolheu a impressora {lista_impressoras[escolha_int]}")
+            impressora = lista_impressoras[escolha_int] 
+            win32print.SetDefaultPrinter(impressora[2])
+        else:
+            limpar()
+            print('#######################################')
+            print(f"# Erro: Escolha um número entre 0 e {tamanho - 1} #")
+            print('#######################################\n')
+            numero = 0
+            for impressoras in lista_impressoras:
+                print(f'{numero} - {impressoras}')
+                numero = numero + 1
+            escolha = input('\nEscolha uma impressora: ')
+            escolha_int = int(escolha)
 
-    if escolha_int in range(int(tamanho)):
-        impressora_escolhida = (f"Você escolheu a impressora {lista_impressoras[escolha_int]}")
-        impressora = lista_impressoras[escolha_int] 
-        win32print.SetDefaultPrinter(impressora[2])
-    else:
-        limpar()
-        print('#######################################')
-        print(f"# Erro: Escolha um número entre 0 e {tamanho - 1} #")
-        print('#######################################\n')
-        numero = 0
-        for impressoras in lista_impressoras:
-            print(f'{numero} - {impressoras}')
-            numero = numero + 1
-        escolha = input('\nEscolha uma impressora: ')
-        escolha_int = int(escolha)
- 
+
 # mandar imprimir todos os arquivos de uma pasta
 limpar()
 print('\n############################################')
